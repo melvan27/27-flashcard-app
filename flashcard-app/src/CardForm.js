@@ -6,6 +6,7 @@ function CardForm({ onSubmit, initialValues, isEdit }) {
   const { deckId } = useParams();
 
   const handleChange = (event) => {
+    // hold the changes made to the card
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -15,6 +16,10 @@ function CardForm({ onSubmit, initialValues, isEdit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(formData);
+    if (!isEdit) {
+      // clear form
+      setFormData({});
+    }
   };
 
   return (
