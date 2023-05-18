@@ -11,7 +11,7 @@ function EditCard() {
 
   useEffect(() => {
     const abortController = new AbortController();
-
+    // load the selected card
     const loadCard = async () => {
       try {
         const cardData = await readCard(cardId, abortController.signal);
@@ -20,7 +20,7 @@ function EditCard() {
         console.error(error);
       }
     };
-
+    // load the deck that the card is from
     const loadDeck = async () => {
       try {
         const deckData = await readDeck(deckId, abortController.signal);
@@ -39,6 +39,7 @@ function EditCard() {
   }, [deckId, cardId]);
 
   const handleSubmit = async (formData) => {
+    // update the card in the deck
     try {
       await updateCard({ ...formData, id: cardId });
       history.push(`/decks/${deckId}`);
