@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { readDeck, createCard } from "./utils/api/index";
+import CardForm from "./CardForm";
 
 function AddCard() {
   const { deckId } = useParams();
   const history = useHistory();
-  const [formData, setFormData] = useState({
-    front: "",
-    back: "",
-  });
   const [deck, setDeck] = useState(null);
 
   useEffect(() => {
@@ -29,20 +26,13 @@ function AddCard() {
     };
   }, [deckId]);
 
-  const handleChange = (event) => {
-    //hold the changes made to the card
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleSubmit = async (event) => {
-    // add the new card to the deck
-    event.preventDefault();
+  const handleSubmit = async (formData) => {
     try {
+      // create the new card and add it to the deck
       await createCard(deckId, formData);
-      history.push(`/decks/${deckId}`);
+
+      // redirect to the add card page
+      history.push(`/decks/${deckId}/cards/new`);
     } catch (error) {
       console.error(error);
     }
@@ -68,38 +58,7 @@ function AddCard() {
         </ol>
       </nav>
       <h2>{deck.name}: Add Card</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="front">Front</label>
-          <textarea
-            className="form-control"
-            id="front"
-            name="front"
-            value={formData.front}
-            onChange={handleChange}
-            rows="3"
-            required
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor="back">Back</label>
-          <textarea
-            className="form-control"
-            id="back"
-            name="back"
-            value={formData.back}
-            onChange={handleChange}
-            rows="3"
-            required
-          ></textarea>
-        </div>
-        <Link to={`/decks/${deckId}`} className="btn btn-secondary mr-2">
-          Done
-        </Link>
-        <button type="submit" className="btn btn-primary">
-          Save
-        </button>
-      </form>
+      <CardForm onSubmit={handleSubmit} />
     </div>
   );
 }
