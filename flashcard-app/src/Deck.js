@@ -80,13 +80,13 @@ function Deck() {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{description}</p>
-          <Link to={`/decks/${deckId}/edit`} className="btn btn-secondary">
+          <Link to={`/decks/${deckId}/edit`} className="btn btn-secondary mr-2">
             Edit
           </Link>
-          <Link to={`/decks/${deckId}/study`} className="btn btn-primary">
+          <Link to={`/decks/${deckId}/study`} className="btn btn-primary mr-2">
             Study
           </Link>
-          <Link to={`/decks/${deckId}/cards/new`} className="btn btn-primary">
+          <Link to={`/decks/${deckId}/cards/new`} className="btn btn-primary mr-2">
             Add Cards
           </Link>
           <button className="btn btn-danger" onClick={handleDeleteDeck}>

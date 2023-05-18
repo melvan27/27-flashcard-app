@@ -52,10 +52,10 @@ function Home() {
             <h5 className="card-title">{deck.name}</h5>
             <h6 className="card-subtitle mb-2 text-muted">{deck.cards.length} cards</h6>
             <p className="card-text">{deck.description}</p>
-            <Link to={`/decks/${deck.id}`} className="btn btn-secondary">
+            <Link to={`/decks/${deck.id}`} className="btn btn-secondary mr-2">
               View
             </Link>
-            <Link to={`/decks/${deck.id}/study`} className="btn btn-primary">
+            <Link to={`/decks/${deck.id}/study`} className="btn btn-primary mr-2">
               Study
             </Link>
             <button
